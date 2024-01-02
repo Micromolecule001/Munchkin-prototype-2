@@ -19,7 +19,6 @@ Mongoose.connection.on('error', (err) => {
 
 app.get("/", (req, res) => {
     res.render('homeView', {
-        translation: 'there will be your translation'
     });
 });
 
@@ -28,7 +27,6 @@ app.get("/", (req, res) => {
 
 app.post("/raceAdd", addNewRace, (req, res) => {
     res.render('raceAddView', {
-        translation: 'there will be your translation'
     });
 });
 

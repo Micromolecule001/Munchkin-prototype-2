@@ -10,6 +10,7 @@
       background: linear-gradient(132deg, rgba(81, 177, 105, 0.4), rgba(98, 133, 118, 0.6));
       background-size: cover;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -45,15 +46,15 @@
 
         <label for="name__form"> Name of the card: </label>
         <input type="text" id="name__form" name="name" required><br><br>
-
+        
         <label for="ability__form"> Race abilities: </label>
-        <input type="text" id="abilitiy__form" name="ability"><br><br>
+        <textarea id="ability__form" name="ability"  type="text"></textarea><br><br>
 
         <label for="image__form"> Image link: </label>
-        <input type="password" id="image__form" name="image"><br><br>
+        <input type="text" id="image__form" name="image"><br><br>
 
         <label for="type__form"> Card type: </label>
-        <input type="email" id="type__form" name="type"><br><br>
+        <input type="text" id="type__form" name="type"><br><br>
 
         <input type="submit" value="add">
     </form>

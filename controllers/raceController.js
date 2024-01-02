@@ -1,6 +1,6 @@
 // raceController.js
 
-import Race from '../models/raceModel.js';
+import Race from '../models/RaceModel.js';
 
 export const addNewRace = async (req, res) => {
   try {
