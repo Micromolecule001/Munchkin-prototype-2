@@ -1,17 +1,7 @@
-import Express from "express";
-import Mongoose from "mongoose";
 import { addNewRace } from './controllers/raceController.js';
 import { addNewClass } from './controllers/classController.js';
-
-
-
-// App
-const app = Express();
-
-app.set('view engine', 'ejs');
-app.use(Express.urlencoded({ extended: true })); // for handling data from HTML-form
-app.use(Express.json()); // for JSON
-app.use(Express.static('public'));
+import app from "./configs/expressConfig.js";
+import Mongoose from "mongoose";
 
 // Connect to MongoDB
 Mongoose.connect("mongodb+srv://God:admin@munchkindb.cb182fh.mongodb.net/MunchkinDB?retryWrites=true&w=majority")
@@ -24,7 +14,6 @@ Mongoose.connection.on('error', (err) => {
     console.log('Error connecting to MongoDB', err);
 });
 
-app.use(Express.json());
 
 // home page
 
@@ -37,16 +26,10 @@ app.get("/", (req, res) => {
 
 // Insert race to db end-points here
 
-app.get("/raceAdd", (req, res) => {
+app.post("/raceAdd", addNewRace, (req, res) => {
     res.render('raceAddView', {
         translation: 'there will be your translation'
     });
-});
-
-app.post("/raceAdd", addNewRace);
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
 });
 
 
