@@ -24,11 +24,12 @@ app.get("/", (req, res) => {
 
 
 // Insert race to db end-points here
-
-app.post("/raceAdd", addNewRace, (req, res) => {
+app.get("/raceAdd", (req, res) => {
     res.render('raceAddView', {
     });
 });
+
+app.post("/raceAdd", addNewRace);
 
 
 

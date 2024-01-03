@@ -3,61 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <title>Transaction History</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&family=Signika+Negative:wght@500&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      font-family: 'Love Ya Like A Sister', cursive;
+    }
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(132deg, rgba(81, 177, 105, 0.4), rgba(98, 133, 118, 0.6));
-      background-size: cover;
+      background: blanchedalmond;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+    }
+    
+    .container {
+      margin: 0;
+      padding: 0;
+
+      height: 100%;
+      width: fit-content;
+      max-width: 1000px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
     }
 
-    table {
-      width: 80%;
-      margin-top: 20px;
-      border-collapse: collapse;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 20px;
+    h1 {
+      font-size: 36px;
+      color: rgba(88, 25, 25, 0.801);
+      text-shadow: 4px 1px 7px rgba(0,0,0,0.33);
+    }
+
+    .button {
+      font-size: 16px;
+      color: burlywood;
+      background-color: rgba(88, 25, 25, 0.801);
+      border: 1px solid #ddd;
+      padding: 10px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
+    textarea {
+      max-width: 160px;
+      max-height: 120px;
+      min-width: 100%;
     }
   </style>
 </head>
 <body>
+  <div class="container">
     <h1>Add New Race Card</h1>
 
     <form action="/raceAdd" method="POST">
-        <label for="id__form"> RaceId: </label>
-        <input type="text" id="id__form" name="raceId" required><br><br>
+      <div class="flexH">
+        <label for="id__form"> RaceId </label>
+        <input type="text" id="id__form" name="raceId" required>
+      </div>
+      
+      <br>
 
-        <label for="name__form"> Name of the card: </label>
-        <input type="text" id="name__form" name="name" required><br><br>
-        
-        <label for="ability__form"> Race abilities: </label>
-        <textarea id="ability__form" name="ability"  type="text"></textarea><br><br>
+      <div class="flexH">
+        <label for="name__form"> Name of the card </label>
+        <input type="text" id="name__form" name="name" required>
+      </div>
+      
+      <br>
 
-        <label for="image__form"> Image link: </label>
-        <input type="text" id="image__form" name="image"><br><br>
+      <div class="flexH">
+        <label for="image__form"> Image link </label>
+        <input type="text" id="image__form" name="image">
+      </div>
+      
+      <br>
 
-        <label for="type__form"> Card type: </label>
-        <input type="text" id="type__form" name="type"><br><br>
+      <div class="flexH">
+        <label for="type__form"> Card type </label>
+        <input type="text" id="type__form" name="type">
+      </div>
+      
+      <br>
 
-        <input type="submit" value="add">
+      <div class="flexH">
+        <label for="ability__form"> Race abilities </label>
+        <textarea id="ability__form" name="ability"  type="text"></textarea>
+      </div><br>
+      
+      <br>
+
+      <input type="submit" value="Add to Database" class="button">
     </form>
+  </div>
 </body>
 </html>
 
