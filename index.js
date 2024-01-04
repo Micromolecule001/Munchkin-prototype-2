@@ -2,6 +2,7 @@ import { addNewRace } from './controllers/raceController.js';
 import { addNewClass } from './controllers/classController.js';
 import app from "./configs/expressConfig.js";
 import Mongoose from "mongoose";
+import { getRacesData } from './controllers/raceController.js';
 
 // Connect to MongoDB
 Mongoose.connect("mongodb+srv://God:admin@munchkindb.cb182fh.mongodb.net/MunchkinDB?retryWrites=true&w=majority")
@@ -32,11 +33,15 @@ app.get("/raceAdd", (req, res) => {
 app.post("/raceAdd", addNewRace);
 
 // races list page
-app.get("/raceList", (req, res) => {
+app.get('/raceList', async (req, res) => {
+    const races = await getRacesData();
+
+    console.log('races: ', races);
+    
     res.render('raceListView', {
+        races: races 
     });
 });
-
 // Insert class to db end-points here
 app.get("/classAdd", (req, res) => {
     res.render('classAddView', {

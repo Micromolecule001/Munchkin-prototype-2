@@ -41,28 +41,36 @@ export const addNewRace = async (req, res) => {
 };
 
 
-export const getRaces = async (req, res) => {
-  try {
-    let races = [];
+export const getRacesData = async () => {
+  let races = [];
 
-    
+  let count = typeof raceDocumentCount === 'function' ? await raceDocumentCount() : raceDocumentCount;
 
-    for (let i = 0; i < raceDocumentCount; i++) {
-      // Perform logic to fetch races from the database or any other data source
-      // and add them to the races array
+  for (let id = 1; id < count; id++) {
+    // Fetch the race document from the database
+    const race = await Race.findOne({ raceId: id }).exec();
+  
+    // Check if the race document exists
+    if (race) {
       races.push({
-        raceId: i + 1,
-        name: `Race ${i + 1}`,
-        ability: `Ability ${i + 1}`,
-        image: `Image ${i + 1}`,
-        type: `Type ${i + 1}`,
+        raceId: id,
+        name: race.name,
+        ability: race.ability,
+        image: race.image,
+        type: race.type,
       });
     }
+  }
 
-    res.render('raceAddView', {
-      message: 'Register successful',
-      races: races,
-    });
+  console.log('getRaces done')
+
+  return races;
+};
+
+export const getRaces = async (req, res) => {
+  try {
+    const races = await getRacesData();
+    res.render('raceListView', { message: 'Register successful', races: races });
   } catch (error) {
     res.status(500).json({ error: 'Register failed', message: error.message });
   }

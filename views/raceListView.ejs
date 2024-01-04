@@ -12,7 +12,7 @@
     :root {
         --darkBrown-color: rgba(88, 25, 25, 0.801);
         --lightBrown-color: burlywood;
-        --backgroun-color:blanchedalmond;
+        --backgroun-color: blanchedalmond;
     }
     
     * {
@@ -20,12 +20,14 @@
       padding: 0px;
 
       font-family: 'Love Ya Like A Sister', cursive;
+
+      border: 2px dotted red;
     }
 
     body {
       min-height: 90vh;
 
-      background: blanchedalmond;
+      background: var(--backgroun-color);
 
       display: flex;
       flex-direction: column;
@@ -44,151 +46,13 @@
       align-items: center;
     }
 
-    h1 {
-      margin: 0px 0px 70px 0px;
-      padding: 0px;
-      font-size: 44px;
-      font-weight: bold;
-
-      color: rgba(88, 25, 25, 0.801);
-      text-shadow: 4px 1px 5px rgba(0,0,0,0.33);
+    .title {
+      color: var(--darkBrown-color)
     }
 
-    label {
-      font-size: 24px;
-      font-weight: bold 400;
-
-      color: rgba(88, 25, 25, 0.801);
-      text-shadow: 4px 1px 5px rgba(0,0,0,0.33);
+    .card {
+      background-color: var(--backgroun-color);
     }
-
-    .border__imitation {
-      width: fit-content;
-      height: fit-content;
-
-      border: 7px solid rgba(88, 25, 25, 0.701);
-      border-radius: 9px;
-      background-color: rgba(88, 25, 25, 1);
-    }
-
-    textarea {
-      margin: 1px 0px -4px 0px;
-      padding: 20px;
-
-      width: 600px;
-      max-width: 600px;
-      min-width: 300px;
-      max-height: 124px;
-      min-height: 100px;
-
-      font-size: 20px;
-      font-weight: bold;
-
-      color: rgba(88, 25, 25, 0.901); 
-      background-color: burlywood;
-      border-radius: 16px;
-      border: none;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      outline: none;
-    }    
-
-    input {
-      margin: 0px -2px 0px -2px;
-      padding: 0px;
-
-      width: 350px;
-      height: 30px;
-
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-
-      color: rgba(88, 25, 25, 0.901); 
-      background-color: burlywood;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      outline: none;
-      
-      transition: 0.7s;
-    }
-
-    input:focus,
-    textarea:focus {
-      border: none;
-      outline: none;
-    }
-
-
-    .input__button {
-      margin: 15px 0px -5px 0px;
-      padding: 8px;
-
-      width: 100%;
-      height: 60px;
-
-      font-size: 20px;
-      font-weight: bold;
-
-      color:burlywood;
-      background-color: rgba(88, 25, 25, 0.901);
-      border: 4px solid rgba(88, 25, 25, 0.801);
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(65, 26, 26, 0.2);
-    }
-
-    .input__button:hover {
-      cursor: pointer;
-    }
-
-    .input__button:active {
-      background-color: rgba(88, 25, 25, 0.801);
-      color: burlywood;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-      transform: translateY(4px);
-    }
-
-    .button__container {
-      margin: 15px 0px 0px 0px;
-      padding: 0px;
-
-      width: 100%;
-      height: fit-content;
-
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-
-    button {
-      width: 100%;
-      height: 40px;
-
-      font-size: 20px;
-      font-weight: bold;
-
-      color:burlywood;
-      background-color: rgba(88, 25, 25, 0.901);
-      border: 4px solid rgba(88, 25, 25, 0.801);
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(65, 26, 26, 0.2);
-
-      transition: 0.7s;
-    }
-
-    button:hover,
-    .input__button:hover {
-      cursor: pointer;
-      transform: scale(1.03);
-      transition: 0.7s;
-
-      background-color: burlywood;
-      color: rgba(88, 25, 25, 0.901);
-    }
-
     .flexH {
       display: flex;
       flex-direction: row;
@@ -205,63 +69,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Add New Race Card</h1>
+    <h1 class="title">🧝 Races List 🧝‍♀️</h1>
 
-    <form action="/raceAdd" method="POST">
-      <div class="flexH">
-        <label for="id__form"> Race Id </label>
-        <div class="border__imitation">
-          <input type="text" id="id__form" name="raceId" required spellcheck="false">
-        </div>
+    <% console.log(races); %>
+    <% races.forEach((race) => { %>
+      <div class="card">
+        <h1 class="card__title"><%= race.name %></h1>
       </div>
-      
-      <br>
-
-      <div class="flexH">
-        <label for="name__form"> Name of the card </label> 
-        <div class="border__imitation">
-          <input type="text" id="name__form" name="name" required spellcheck="false">
-        </div>
-      </div>
-      
-      <br>
-
-      <div class="flexH">
-        <label for="image__form"> Image link </label>
-        <div class="border__imitation">
-          <input type="text" id="image__form" name="image" spellcheck="false">
-        </div>  
-      </div>
-      
-      <br>
-
-      <div class="flexH">
-        <label for="type__form"> Card type </label>
-        <div class="border__imitation">
-          <input type="text" id="type__form" name="type" spellcheck="false">
-        </div>
-      </div>
-      
-      <br>
-
-      <br>
-
-      <div class="flexV">
-        <label for="ability__form"> Race abilities </label>
-        <div class="border__imitation">
-          <textarea id="ability__form" name="ability"  type="text" spellcheck="false"></textarea>
-        </div>
-      </div>
-
-      <br>
-
-      <input type="submit" value="Add to Database" class="input__button">
-
-      <div class="button__container">
-        <button onclick="location.href='/'"> Go back </button>
-        <button onclick="location.href='/raceList'"> Race List </button>
-      </div>
-    </form>
+     <% }) %>
+    </div>
   </div>
 </body>
 </html>
