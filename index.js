@@ -31,7 +31,11 @@ app.get("/raceAdd", (req, res) => {
 
 app.post("/raceAdd", addNewRace);
 
-
+// races list page
+app.get("/raceList", (req, res) => {
+    res.render('raceListView', {
+    });
+});
 
 // Insert class to db end-points here
 app.get("/classAdd", (req, res) => {
