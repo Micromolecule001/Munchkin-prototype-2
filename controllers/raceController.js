@@ -9,7 +9,6 @@ export const addNewRace = async (req, res) => {
     let raceId = Number(req.body.raceId);
     const { name, ability, image, type  } = req.body;
     
-    console.log('req.body: ', req.body);
 
     // Create a new race instance
     const newRace = new Race({
@@ -30,7 +29,6 @@ export const addNewRace = async (req, res) => {
 
     // If successful
 
-    console.log('newRace: ', newRace);
     res.render('raceAddView', {
       message: 'Register successful',
       userId: newRace.id,
@@ -48,22 +46,20 @@ export const getRacesData = async () => {
 
   for (let id = 1; id < count; id++) {
     // Fetch the race document from the database
-    const race = await Race.findOne({ raceId: id }).exec();
+    const raceCard = await Race.findOne({ raceId: id }).exec();
   
     // Check if the race document exists
-    if (race) {
+    if (raceCard) {
       races.push({
         raceId: id,
-        name: race.name,
-        ability: race.ability,
-        image: race.image,
-        type: race.type,
+        name: raceCard.name,
+        ability: raceCard.ability,
+        image: raceCard.image,
+        type: raceCard.type,
       });
     }
   }
-
-  console.log('getRaces done')
-
+  
   return races;
 };
 
@@ -80,7 +76,6 @@ export const getRaces = async (req, res) => {
 export const raceDocumentCount = async () => {
   try {
     const count = await Race.countDocuments();
-    console.log('Document count:', count);
     return count;
   } catch (error) {
     console.error('Error getting document count:', error);

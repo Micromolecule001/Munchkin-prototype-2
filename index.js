@@ -35,11 +35,9 @@ app.post("/raceAdd", addNewRace);
 // races list page
 app.get('/raceList', async (req, res) => {
     const races = await getRacesData();
-
-    console.log('races: ', races);
     
     res.render('raceListView', {
-        races: races 
+        races: races,
     });
 });
 // Insert class to db end-points here
