@@ -1,6 +1,8 @@
 // raceController.js
+import RaceModel from '../models/RaceModel.js';
 
-import Race from '../models/RaceModel.js';
+
+// ========================== Add new Race to DB ==================================
 
 export const addNewRace = async (req, res) => {
   try {
@@ -11,7 +13,7 @@ export const addNewRace = async (req, res) => {
     
 
     // Create a new race instance
-    const newRace = new Race({
+    const newRace = new RaceModel({
       raceId,
       name,
       ability,
@@ -20,37 +22,37 @@ export const addNewRace = async (req, res) => {
     });
 
     // Save the new race to the database
-    try {
-      await newRace.save();
-    } catch (error) {
-      return res.status(500).json({ error: 'Save failed', message: error.message });
-    }
-   
-
+    await newRace.save();
+    
+  
     // If successful
-
     res.render('raceAddView', {
-      message: 'Register successful',
-      userId: newRace.id,
+      status: 'Done',
     });
+
   } catch (error) { 
-    res.status(500).json({ error: 'Register failed', message: error.message })
+    res.status(500).json({ error: 'Adding failed: ', message: error.message })
   }
 };
 
 
+// ========================= Get all Races from DB =================================
+
 export const getRacesData = async () => {
-  let races = [];
 
-  let count = typeof raceDocumentCount === 'function' ? await raceDocumentCount() : raceDocumentCount;
+  // Empty Object and Count of Races in DB
+  const racesCount = await RaceModel.countDocuments();
+  const racesResult = [];
 
-  for (let id = 1; id < count; id++) {
-    // Fetch the race document from the database
-    const raceCard = await Race.findOne({ raceId: id }).exec();
+  // From id = 1 to last (by count) Race id
+  for (let id = 1; id < racesCount; id++) {
+
+    // Fetch the race document from the database ? 
+    const raceCard = await RaceModel.findOne({ raceId: id }).exec();
   
-    // Check if the race document exists
+    // If Race exists, push it to the racesResult array
     if (raceCard) {
-      races.push({
+      racesResult.push({
         raceId: id,
         name: raceCard.name,
         ability: raceCard.ability,
@@ -60,30 +62,6 @@ export const getRacesData = async () => {
     }
   }
   
-  return races;
+  // Return the racesResult array
+  return racesResult;
 };
-
-export const getRaces = async (req, res) => {
-  try {
-    const races = await getRacesData();
-    res.render('raceListView', { message: 'Register successful', races: races });
-  } catch (error) {
-    res.status(500).json({ error: 'Register failed', message: error.message });
-  }
-};
-
-// Get the number of documents in the database
-export const raceDocumentCount = async () => {
-  try {
-    const count = await Race.countDocuments();
-    return count;
-  } catch (error) {
-    console.error('Error getting document count:', error);
-    throw error;
-  }
-};
-
-
-export default {
-    addNewRace,
-  };

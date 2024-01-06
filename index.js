@@ -4,7 +4,9 @@ import app from "./configs/expressConfig.js";
 import Mongoose from "mongoose";
 import { getRacesData } from './controllers/raceController.js';
 
-// Connect to MongoDB
+
+// ================== Connect to MongoDB ======================
+
 Mongoose.connect("mongodb+srv://God:admin@munchkindb.cb182fh.mongodb.net/MunchkinDB?retryWrites=true&w=majority")
 
 Mongoose.connection.on('connected', () => {
@@ -16,44 +18,75 @@ Mongoose.connection.on('error', (err) => {
 });
 
 
-// home page
+// ======================= Home page ==========================
 
 app.get("/", (req, res) => {
     res.render('homeView', {
     });
 });
 
+// ============================================================
 
-// Insert race to db end-points here
+
+// ============ Insert Races to DB end-point here =============
+
 app.get("/raceAdd", (req, res) => {
     res.render('raceAddView', {
     });
 });
 
+// post 
+
 app.post("/raceAdd", addNewRace);
 
-// races list page
+// ============================================================
+
+
+// ==================== Races List page =======================
+
 app.get('/raceList', async (req, res) => {
-    const races = await getRacesData();
+    const racesArray = await getRacesData();
     
     res.render('raceListView', {
-        races: races,
+        RacesArray: racesArray,
     });
 });
-// Insert class to db end-points here
+
+// ============================================================
+
+
+// ============ Insert Classes to DB end-point here ===========
 app.get("/classAdd", (req, res) => {
     res.render('classAddView', {
-        translation: 'there will be your translation'
     });
 });
 
 app.post("/classAdd", addNewClass);
 
+// ============================================================
+
+
+// ==================== Classes List page =====================
+
+app.get('/classList', async (req, res) => {
+    const ClassArray = await getRacesData();
+    
+    res.render('raceListView', {
+        ClassArray: ClassArray,
+    });
+});
+
+// ============================================================
 
 
 
 
+// else ......
 
+
+
+
+// ================= listen to port 3000 ======================
 
 app.listen(3000, (err) => {
     if (err) {

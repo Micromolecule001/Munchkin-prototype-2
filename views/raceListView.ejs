@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Transaction History</title>
+  <title> Transaction History </title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,16 +49,20 @@
     .title,
     h1,
     p,
-    .type {
+    .type,
+    img {
       padding: 10px;
       color: var(--darkBrown-color);
     }
+
     .title {
       font-size: 56px;
       margin-bottom: 40px;
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.275);
     }
-    .type {
+
+    .type,
+    img {
       margin: 0px 10px;;
 
       font-weight: bold;
@@ -139,8 +143,7 @@
     <h1 class="title">🧝 Races List 🧝‍♀️</h1>
 
     <div class="flexH">
-      <% console.log(races); %>
-      <% races.forEach((race) => { %>
+      <% RacesArray.forEach((race) => { %>
       <div class="border__imitation">
         <div class="card">
           <div class="description">
@@ -153,7 +156,7 @@
 
           <!-- will be done after image db problems -->
           <% if(race.image === "Null") { %>
-            <img src="#" alt="<%= race.image%> ">
+            <img src="<%= race.image %>" alt="I can't find image for this creature *Null*">
           <% } else { %>
             <img src="#" alt="<%= race.image%> ">
           <% } %>
